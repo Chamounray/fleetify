@@ -1,0 +1,21 @@
+{
+  "name": "fleetify",
+  "private": true,
+  "version": "1.0.0",
+  "workspaces": [
+    "shared",
+    "server",
+    "client"
+  ],
+  "scripts": {
+    "dev": "npm run dev --workspaces --if-present",
+    "dev:server": "npm run dev -w @fleetify/server",
+    "dev:client": "npm run dev -w @fleetify/client",
+    "build": "npm run build -w @fleetify/shared && npm run build -w @fleetify/server && npm run build -w @fleetify/client",
+    "test": "npm run test -w @fleetify/server && npm run test -w @fleetify/client",
+    "lint": "npm run lint -w @fleetify/server && npm run lint -w @fleetify/client",
+    "seed": "npm run seed -w @fleetify/server",
+    "bootstrap:admins": "npm run bootstrap:admins -w @fleetify/server",
+    "docs:smoke": "npm run docs:smoke -w @fleetify/server"
+  }
+}

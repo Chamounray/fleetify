@@ -1,0 +1,201 @@
+@import "@fontsource-variable/plus-jakarta-sans";
+@import "tailwindcss";
+
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+
+@theme {
+  --font-sans: "Plus Jakarta Sans Variable", "Segoe UI", sans-serif;
+  --font-mono: ui-monospace, "Cascadia Mono", "SFMono-Regular", Menlo, monospace;
+  --color-ink: var(--fy-ink);
+  --color-navy: var(--fy-navy);
+  --color-slate-ink: var(--fy-muted);
+  --color-action: var(--fy-action);
+  --color-canvas: var(--fy-canvas);
+  --color-line: var(--fy-line);
+  --color-surface: var(--fy-surface);
+  --color-drain: var(--fy-drain);
+  --ease-ui: cubic-bezier(0.32, 0.72, 0, 1);
+}
+
+:root,
+:root[data-theme="light"] {
+  --fy-ink: #0f172a;
+  --fy-navy: #111827;
+  --fy-muted: #475569;
+  --fy-action: #2563eb;
+  --fy-canvas: #f4f6fa;
+  --fy-line: #e5e7eb;
+  --fy-surface: #ffffff;
+  --fy-drain: #dc2626;
+  --fy-ok: #059669;
+  --fy-shadow: 0 1px 2px rgb(15 23 42 / 0.05), 0 10px 24px rgb(15 23 42 / 0.04);
+  color: var(--fy-ink);
+  background: var(--fy-canvas);
+  font-family: var(--font-sans);
+  color-scheme: light;
+}
+
+:root[data-theme="dark"] {
+  --fy-ink: #e5e7eb;
+  --fy-navy: #0b1220;
+  --fy-muted: #94a3b8;
+  --fy-action: #60a5fa;
+  --fy-canvas: #0b0f16;
+  --fy-line: #1f2937;
+  --fy-surface: #121826;
+  --fy-drain: #f87171;
+  --fy-ok: #34d399;
+  --fy-shadow: 0 1px 2px rgb(0 0 0 / 0.35), 0 12px 28px rgb(0 0 0 / 0.28);
+  color: var(--fy-ink);
+  background: var(--fy-canvas);
+  color-scheme: dark;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+body {
+  margin: 0;
+  min-height: 100dvh;
+  transition: background-color 220ms cubic-bezier(0.32, 0.72, 0, 1), color 220ms cubic-bezier(0.32, 0.72, 0, 1);
+}
+
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 220ms;
+  animation-timing-function: cubic-bezier(0.32, 0.72, 0, 1);
+}
+
+::view-transition-old(root) {
+  animation-name: fy-theme-out;
+}
+
+::view-transition-new(root) {
+  animation-name: fy-theme-in;
+}
+
+@keyframes fy-theme-out {
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes fy-theme-in {
+  from {
+    opacity: 0;
+  }
+}
+
+#root {
+  min-height: 100dvh;
+}
+
+:focus-visible {
+  outline: 2px solid var(--fy-action);
+  outline-offset: 2px;
+}
+
+@keyframes fy-enter {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fy-wave {
+  0%,
+  100% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(14deg);
+  }
+  50% {
+    transform: rotate(-6deg);
+  }
+  75% {
+    transform: rotate(10deg);
+  }
+}
+
+.animate-enter,
+.animate-page {
+  animation: fy-enter 180ms cubic-bezier(0.32, 0.72, 0, 1) both;
+}
+
+.fy-card {
+  transition: transform 180ms cubic-bezier(0.32, 0.72, 0, 1), box-shadow 180ms cubic-bezier(0.32, 0.72, 0, 1);
+}
+
+.fy-wave-hand {
+  display: inline-flex;
+  transform-origin: 70% 90%;
+}
+
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .fy-card:hover {
+    transform: translateY(-2px);
+  }
+
+  .fy-wave-hand {
+    animation: fy-wave 720ms cubic-bezier(0.32, 0.72, 0, 1) 1;
+  }
+
+  .group\/hello:hover .fy-wave-hand {
+    transform: rotate(12deg);
+    transition: transform 180ms cubic-bezier(0.32, 0.72, 0, 1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-enter,
+  .animate-page,
+  .fy-wave-hand {
+    animation: none;
+  }
+
+  .fy-card,
+  .fy-card:hover {
+    transition: none;
+    transform: none;
+  }
+
+  body {
+    transition: none;
+  }
+
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation: none !important;
+  }
+}
+
+/* Mobile shell: thumb-zone spacing and safe areas */
+.fy-mobile {
+  -webkit-tap-highlight-color: transparent;
+}
+
+.fy-mobile input,
+.fy-mobile select,
+.fy-mobile textarea {
+  font-size: 16px; /* avoid iOS zoom on focus */
+}
+
+@media (max-width: 1023px) {
+  .fy-card:hover {
+    transform: none;
+  }
+}
+
