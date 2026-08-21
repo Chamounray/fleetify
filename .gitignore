@@ -3,6 +3,9 @@ dist/
 coverage/
 .env
 .env.local
+.env.render
+.env.production
+*.env.local
 *.log
 .DS_Store
 Thumbs.db

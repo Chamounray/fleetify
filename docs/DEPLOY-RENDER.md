@@ -52,7 +52,7 @@ Do **not** commit `.env` or real passwords.
 | Region | closest to you |
 | Runtime | **Node** |
 | Root Directory | *(leave empty = repo root)* |
-| Build Command | `npm install && npm run build` |
+| Build Command | `npm install --include=dev && npm run build` |
 | Start Command | `npm run start -w @fleetify/server` |
 | Instance | Free is fine to start |
 
